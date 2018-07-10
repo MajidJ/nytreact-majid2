@@ -51,7 +51,7 @@ app.delete("/api/articles/:id", (req,res) => {
 })
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, "./react-ui/client/build"));
+  res.sendFile(path.join(__dirname, "react-ui/client/build"));
 });
 
 app.listen(PORT, function() {
