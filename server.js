@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Serve up static assets (usually on heroku)
 // if (process.env.NODE_ENV === "production") {
-  app.use(express.static("react-ui/client/build"));
+  app.use(express.static("react-ui/build"));
 // }
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
@@ -50,8 +50,8 @@ app.delete("/api/articles/:id", (req,res) => {
   .catch(err => res.status(422).json(err))
 })
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, "react-ui/client/build/index.html"));
+app.use('*', function(req, res) {
+  res.sendFile(path.join(__dirname, "react-ui/build/index.html"));
 });
 
 app.listen(PORT, function() {

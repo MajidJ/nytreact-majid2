@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m-fiks/nytreact.git"
+    "url": "git+https://github.com/taxlife/nytreact.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/m-fiks/nytreact/issues"
+    "url": "https://github.com/taxlife/nytreact/issues"
   },
-  "homepage": "https://github.com/m-fiks/nytreact",
+  "homepage": "https://github.com/taxlife/nytreact",
   "dependencies": {
     "axios": "^0.18.0",
     "concurrently": "^3.6.0",
