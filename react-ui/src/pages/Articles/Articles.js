@@ -106,7 +106,7 @@ class Articles extends Component {
                     <ul className="list-group">
                     {this.state.searchedArticles.map((searchedArticle,index) => (
                         <li className="list-group-item d-flex justify-content-between align-items-center" key={"searchedArticle-" + index}>
-                            <a href={"/articles/" + searchedArticle._id}>
+                            <a href={searchedArticle.url} target="_blank">
                                 <strong>
                                 {searchedArticle.title} - {searchedArticle.date},
                                 </strong>
@@ -125,7 +125,7 @@ class Articles extends Component {
                     <ul className="list-group">
                     {this.state.savedArticles.map(savedArticle => (
                         <li className="list-group-item d-flex justify-content-between align-items-center" key={savedArticle._id}>
-                            <a href={"/articles/" + savedArticle._id}>
+                            <a href={savedArticle.url} target="_blank">
                                 <strong>
                                 {savedArticle.title} - {savedArticle.date}
                                 </strong>
