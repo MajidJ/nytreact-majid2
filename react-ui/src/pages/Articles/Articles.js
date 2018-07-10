@@ -37,6 +37,7 @@ class Articles extends Component {
     };
 
     loadSavedArticles = () => {
+        this.setState({ savedArticles: []});
         API.getArticles()
         .then(res => this.setState({ savedArticles: res.data }))
             // console.log(typeof res.data, res.data))
@@ -58,11 +59,16 @@ class Articles extends Component {
         }
     };
 
-    handleSaveSubmit = event => {
+    handleSaveBtnClick = (index, event) => {
         event.preventDefault();
-        if (this.state.searchInput) {
-            this.loadSearchedArticles(this.state.searchInput)
-        }
+        API.saveArticle(this.state.searchedArticles[index])
+        this.loadSavedArticles();
+    };
+
+    handleDeleteBtnClick = (id, event) => {
+        event.preventDefault();
+        API.deleteArticle(id)
+        this.loadSavedArticles();
     };
 
     render() {
@@ -103,7 +109,7 @@ class Articles extends Component {
                                 {searchedArticle.title}, {searchedArticle.date}
                                 </strong>
                             </a>
-                            <SaveBtn onClick={() => {API.saveArticle(this.state.searchedArticles[index])}} />
+                            <SaveBtn onClick={(e) => {this.handleSaveBtnClick(index, e)}}/>
                         </li>
                     ))}
                     </ul>
@@ -120,7 +126,7 @@ class Articles extends Component {
                                 {savedArticle.title}, {savedArticle.date}
                                 </strong>
                             </a>
-                            <DeleteBtn onClick={() => {API.deleteArticle(savedArticle._id)}} />
+                            <DeleteBtn onClick={(e) => {this.handleDeleteBtnClick(savedArticle._id, e)}}/>
                         </li>
                     ))}
                     </ul>
