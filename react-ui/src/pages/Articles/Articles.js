@@ -38,8 +38,9 @@ class Articles extends Component {
 
     loadSavedArticles = () => {
         API.getArticles()
-        .then(res => console.log(typeof res.data, res.data))
-            // this.setState({ savedArticles: [res.data] }))
+        .then(res => this.setState({ savedArticles: res.data }))
+            // console.log(typeof res.data, res.data))
+            
         .catch(err => console.log(err));
     };
     
