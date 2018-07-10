@@ -50,6 +50,10 @@ app.delete("/api/articles/:id", (req,res) => {
   .catch(err => res.status(422).json(err))
 })
 
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/public/index.html"));
+});
+
 app.listen(PORT, function() {
     console.log(`now listening on PORT ${PORT}!`);
 });
