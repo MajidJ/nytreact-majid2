@@ -18,9 +18,11 @@ class Articles extends Component {
         this.loadSearchedArticles("Trump");
     }
 
-    loadSearchedArticles = (searchField) => {
+    loadSearchedArticles = (searchField, startYear, endYear) => {
         this.setState({searchedArticles: []});
-        API.searchArticles(searchField)
+        console.log("startYear", startYear);
+        console.log("endYear", endYear);
+        API.searchArticles(searchField, startYear, endYear)
         .then(res => {
             res.data.response.docs.forEach(nytArticle => {
                 let newArticle = {
@@ -55,7 +57,7 @@ class Articles extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.searchInput) {
-            this.loadSearchedArticles(this.state.searchInput)
+            this.loadSearchedArticles(this.state.searchInput, this.state.startYear, this.state.endYear)
         }
     };
 
@@ -101,15 +103,17 @@ class Articles extends Component {
                 </form>
                 <h1>Searched Articles On My List</h1>
                 {this.state.searchedArticles.length ? (
-                    <ul>
+                    <ul className="list-group">
                     {this.state.searchedArticles.map((searchedArticle,index) => (
-                        <li key={"searchedArticle-" + index}>
+                        <li className="list-group-item d-flex justify-content-between align-items-center" key={"searchedArticle-" + index}>
                             <a href={"/articles/" + searchedArticle._id}>
                                 <strong>
-                                {searchedArticle.title}, {searchedArticle.date}
+                                {searchedArticle.title} - {searchedArticle.date},
                                 </strong>
                             </a>
-                            <SaveBtn onClick={(e) => {this.handleSaveBtnClick(index, e)}}/>
+                            <span className="badge">
+                                <SaveBtn className="btn btn-primary btn-sm" onClick={(e) => {this.handleSaveBtnClick(index, e)}}/>
+                            </span>
                         </li>
                     ))}
                     </ul>
@@ -118,15 +122,17 @@ class Articles extends Component {
                 )}
                 <h1>Saved Articles On My List</h1>
                 {this.state.savedArticles.length ? (
-                    <ul>
+                    <ul className="list-group">
                     {this.state.savedArticles.map(savedArticle => (
-                        <li key={savedArticle._id}>
+                        <li className="list-group-item d-flex justify-content-between align-items-center" key={savedArticle._id}>
                             <a href={"/articles/" + savedArticle._id}>
                                 <strong>
-                                {savedArticle.title}, {savedArticle.date}
+                                {savedArticle.title} - {savedArticle.date}
                                 </strong>
                             </a>
-                            <DeleteBtn onClick={(e) => {this.handleDeleteBtnClick(savedArticle._id, e)}}/>
+                            <span className="badge">
+                                <DeleteBtn className="btn btn-danger btn-sm" onClick={(e) => {this.handleDeleteBtnClick(savedArticle._id, e)}}/>
+                            </span>
                         </li>
                     ))}
                     </ul>
